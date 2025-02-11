@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:healthcare/view/feedback.dart';
 import 'package:healthcare/view/healthplan.dart';
+import 'package:healthcare/view/support.dart';
 import 'care_plan.dart';
 import 'login.dart';
+import 'notification.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -23,6 +25,8 @@ class _HomeState extends State<home> {
     'asset/banner2.jpg',
     'asset/banner3.jpg',
   ];
+
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -60,6 +64,15 @@ class _HomeState extends State<home> {
           style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications_none, color: Colors.black),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Notification_screen()),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.menu),
             onPressed: () {
@@ -171,8 +184,12 @@ class _HomeState extends State<home> {
                 MaterialPageRoute(builder: (context) => FeedbackScreen()),
               );
             }),
-            _drawerItem(Icons.headset_mic, "Support Request",
-                () => Navigator.pop(context)),
+            _drawerItem(Icons.headset_mic, "Support Request",() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SupportScreen()),
+              );
+            }),
             _drawerItem(Icons.bar_chart, "Level Information",
                 () => Navigator.pop(context)),
             _drawerItem(Icons.exit_to_app, "Logout", () {
@@ -198,7 +215,7 @@ class _HomeState extends State<home> {
             label: 'Message',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.support),
+            icon: Icon(Icons.headset_mic),
             label: 'Support',
           ),
         ],

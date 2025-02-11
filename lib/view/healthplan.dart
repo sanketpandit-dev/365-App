@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthcare/view/plandetail.dart';
-import 'package:healthcare/view/plandetail1.dart';  // Add PlanDetail1 import
-import 'package:healthcare/view/plandetail2.dart';  // Add PlanDetail3 import
+import 'package:healthcare/view/plandetail1.dart';
+import 'package:healthcare/view/plandetail2.dart';
 
 class HealthPlan extends StatefulWidget {
   const HealthPlan({Key? key}) : super(key: key);
