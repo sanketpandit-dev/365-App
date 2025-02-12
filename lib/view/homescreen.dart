@@ -8,16 +8,15 @@ import 'care_plan.dart';
 import 'login.dart';
 import 'notification.dart';
 
-class home extends StatefulWidget {
-  const home({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<home> createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<home> {
-  final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
+class _HomeState extends State<Home> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
 
   List<String> imageList = [
@@ -25,8 +24,6 @@ class _HomeState extends State<home> {
     'asset/banner2.jpg',
     'asset/banner3.jpg',
   ];
-
-
 
   void _onItemTapped(int index) {
     setState(() {
@@ -83,6 +80,7 @@ class _HomeState extends State<home> {
       ),
       body: Column(
         children: [
+          /// --- Image Slider ---
           Container(
             margin: const EdgeInsets.all(15),
             child: CarouselSlider.builder(
@@ -118,8 +116,28 @@ class _HomeState extends State<home> {
               },
             ),
           ),
+
+
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                children: [
+                  _buildCard("Health Plan", 'asset/plan_a.png'),
+                  _buildCard("Appointments", 'asset/plan_a.png'),
+                  _buildCard("Medicine", 'asset/plan_a.png'),
+                  _buildCard("Reports", 'asset/plan_a.png'),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
+
+
       endDrawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -163,16 +181,14 @@ class _HomeState extends State<home> {
               ),
             ),
             _drawerItem(Icons.category, "Product Category",
-                () => Navigator.pop(context)),
-            _drawerItem(Icons.monitor_heart, "View Vital Health",
-                () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AddressScreen()),
-                  );
-                }),
-            _drawerItem(Icons.volunteer_activism_outlined, "View Care Plan",
-                () {
+                    () => Navigator.pop(context)),
+            _drawerItem(Icons.monitor_heart, "View Vital Health", () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddressScreen()),
+              );
+            }),
+            _drawerItem(Icons.volunteer_activism_outlined, "View Care Plan", () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => HealthPlan()),
@@ -184,14 +200,14 @@ class _HomeState extends State<home> {
                 MaterialPageRoute(builder: (context) => FeedbackScreen()),
               );
             }),
-            _drawerItem(Icons.headset_mic, "Support Request",() {
+            _drawerItem(Icons.headset_mic, "Support Request", () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => SupportScreen()),
               );
             }),
             _drawerItem(Icons.bar_chart, "Level Information",
-                () => Navigator.pop(context)),
+                    () => Navigator.pop(context)),
             _drawerItem(Icons.exit_to_app, "Logout", () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => login()),
@@ -200,6 +216,8 @@ class _HomeState extends State<home> {
           ],
         ),
       ),
+
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -223,12 +241,35 @@ class _HomeState extends State<home> {
     );
   }
 
-  // Drawer Item Helper Function
+  /// --- Drawer Items ---
   Widget _drawerItem(IconData icon, String title, VoidCallback onTap) {
     return ListTile(
       leading: Icon(icon),
       title: Text(title),
       onTap: onTap,
+    );
+  }
+
+
+  Widget _buildCard(String title, String imagePath) {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: 35,
+            backgroundImage: AssetImage(imagePath),
+            backgroundColor: Colors.white,
+          ),
+          const SizedBox(height: 10),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 }

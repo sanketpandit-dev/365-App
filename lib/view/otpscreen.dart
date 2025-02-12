@@ -80,6 +80,8 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
             SizedBox(height: 20),
             PinCodeTextField(
+
+
               appContext: context,
               length: 4,
               controller: otpController,
@@ -92,7 +94,8 @@ class _OtpScreenState extends State<OtpScreen> {
               textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               pinTheme: PinTheme(
                 shape: PinCodeFieldShape.box,
-                borderRadius: BorderRadius.circular(5),
+
+               borderRadius: BorderRadius.circular(5),
                 fieldHeight: 50,
                 fieldWidth: 50,
                 activeFillColor: Colors.white,
@@ -125,7 +128,7 @@ class _OtpScreenState extends State<OtpScreen> {
               onPressed: isOtpFilled ? () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => home()),
+                  MaterialPageRoute(builder: (context) => Home()),
                 );
               } : null,
               style: ElevatedButton.styleFrom(

@@ -179,7 +179,7 @@ class _SupportScreenState extends State<SupportScreen> {
               ),
             ),
             Center(
-              child: Image.asset("asset/help.png", height: 150),
+              child: Image.asset("asset/help.png", height: 170),
             ),
 
           ],

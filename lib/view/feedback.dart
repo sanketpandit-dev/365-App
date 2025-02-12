@@ -17,7 +17,7 @@ class FeedbackScreen extends StatelessWidget {
       memberSince: "Oct 2022",
       review:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing.",
-      imageUrl: "https://randomuser.me/api/portraits/men/2.jpg",
+      imageUrl: "https://randomuser.me/api/portraits/men/5.jpg",
       rating: 5,
     ),
     Testimonial(
@@ -25,7 +25,7 @@ class FeedbackScreen extends StatelessWidget {
       memberSince: "Oct 2022",
       review:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing.",
-      imageUrl: "https://randomuser.me/api/portraits/men/2.jpg",
+      imageUrl: "https://randomuser.me/api/portraits/men/9.jpg",
       rating: 5,
     ),
   ];

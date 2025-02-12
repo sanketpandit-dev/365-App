@@ -47,7 +47,7 @@ class AddressScreen extends StatelessWidget {
 
             SizedBox(height: 24),
             _buildHomeCareInfo(),
-            SizedBox(height: 100), // Extra space to prevent overlapping
+            SizedBox(height: 100),
           ],
         ),
       ),
@@ -103,12 +103,22 @@ class AddressScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Home Care, On Demand", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        SizedBox(height: 8),
-        _buildInfoRow(Icons.check_circle, Colors.green, "100+ Care Buddies to take care of your loved one"),
-        _buildInfoRow(Icons.verified, Colors.blue, "Verified and Experienced Professionals"),
-        _buildInfoRow(Icons.people, Colors.orange, "Trusted by 1Mn+ People Across World"),
+        Row(
+          children: [
+            Text("Home Care, On Demand", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+
+          ],
+
+        ),
+
+        _buildInfoRow(Icons.check_circle, Colors.green, "100+ Care Buddies to take \n care  of your loved one"),
+        _buildInfoRow(Icons.verified, Colors.blue, "Verified and Experienced \n Professionals"),
+        _buildInfoRow(Icons.people, Colors.orange, "Trusted by 1Mn+ People  \n Across World"),
+
+
       ],
+
+
     );
   }
 
