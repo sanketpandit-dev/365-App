@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(Duration(seconds: 4), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => login()),
+        MaterialPageRoute(builder: (context) => Login()),
       );
     });
   }
@@ -55,10 +55,11 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           Stack(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
+            clipBehavior: Clip.none,
             children: [
               Container(
-                height: 280,
+                height: 250,
                 decoration: BoxDecoration(
                   color: Colors.amber.shade600,
                   borderRadius: BorderRadius.only(
@@ -68,27 +69,21 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
               Positioned(
-                top: 20,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'asset/mother-png-41484.png',
-                    width: 600,
-                    height: 270,
-                    fit: BoxFit.cover,
-                  ),
+                top: -100,
+                child: Image.asset(
+                  'asset/mother-png-41484.png',
+                  width: 300,
+                  height: 370,
+                  fit: BoxFit.cover,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 100.0,),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 200.0),
-                    child: LinearProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      backgroundColor: Colors.orangeAccent,
-                    ),
+                padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 200.0),
+                  child: LinearProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    backgroundColor: Colors.orangeAccent,
                   ),
                 ),
               ),
@@ -100,13 +95,3 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-class LoginScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("Login Screen"),
-      ),
-    );
-  }
-}

@@ -57,49 +57,51 @@ class _HealthPlanState extends State<HealthPlan> {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            CaretakerCard(
-              level: 1,
-              price: 30000,
-              imagePath: 'asset/plan1.jpg',
-              services: const ['Care Program', 'Companionship Program.'],
-              color: const Color(0xFFFFF8E7),
-              levelColor: Colors.orange,
-              selectedLevel: _selectedLevel,
-              onSelect: _onPlanSelected,
-            ),
-            const SizedBox(height: 5),
-            CaretakerCard(
-              level: 2,
-              price: 60000,
-              imagePath: 'asset/plan2.jpg',
-              services: const [
-                'Terminal Illness Support',
-                'Post Operations',
-                'Palliative Care'
-              ],
-              color: const Color(0xFFE7FFF8),
-              levelColor: Colors.green,
-              selectedLevel: _selectedLevel,
-              onSelect: _onPlanSelected,
-            ),
-            const SizedBox(height: 5),
-            CaretakerCard(
-              level: 3,
-              price: 90000,
-              imagePath: 'asset/plan3.jpg',
-              services: const [
-                'Inhouse Mini ICU',
-                'Alzheimer Support',
-                "Parkinson's Support"
-              ],
-              color: const Color(0xFFE7F4FF),
-              levelColor: Colors.blue,
-              selectedLevel: _selectedLevel,
-              onSelect: _onPlanSelected,
-            ),
-          ],
+        child: Center(
+          child: Column(
+            children: [
+              CaretakerCard(
+                level: 1,
+                price: 30000,
+                imagePath: 'asset/plan1.jpg',
+                services: const ['Care Program', 'Companionship Program.'],
+                color: const Color(0xFFFFF8E7),
+                levelColor: Colors.orange,
+                selectedLevel: _selectedLevel,
+                onSelect: _onPlanSelected,
+              ),
+              const SizedBox(height: 5),
+              CaretakerCard(
+                level: 2,
+                price: 60000,
+                imagePath: 'asset/plan2.jpg',
+                services: const [
+                  'Terminal Illness Support',
+                  'Post Operations',
+                  'Palliative Care'
+                ],
+                color: const Color(0xFFE7FFF8),
+                levelColor: Colors.green,
+                selectedLevel: _selectedLevel,
+                onSelect: _onPlanSelected,
+              ),
+              const SizedBox(height: 5),
+              CaretakerCard(
+                level: 3,
+                price: 90000,
+                imagePath: 'asset/plan3.jpg',
+                services: const [
+                  'Inhouse Mini ICU',
+                  'Alzheimer Support',
+                  "Parkinson's Support"
+                ],
+                color: const Color(0xFFE7F4FF),
+                levelColor: Colors.blue,
+                selectedLevel: _selectedLevel,
+                onSelect: _onPlanSelected,
+              ),
+            ],
+          ),
         ),
       ),
       backgroundColor: Colors.white,

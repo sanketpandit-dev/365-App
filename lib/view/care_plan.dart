@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:healthcare/view/homescreen.dart';
 
 import 'care_taker_list.dart';
 
-// class careplan extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: AddressScreen(),
-//     );
-//   }
-// }
+class AddressScreen extends StatefulWidget {
+  @override
+  _AddressScreenState createState() => _AddressScreenState();
+}
 
-class AddressScreen extends StatelessWidget {
+class _AddressScreenState extends State<AddressScreen> {
+  String _selectedCity = "Mumbai"; // State to hold the selected city
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home(),
+              ),
+            );
+          },
         ),
         title: Text("Choose care taker", style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
@@ -36,7 +41,6 @@ class AddressScreen extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
-
 
             _buildDropdown(),
 
@@ -67,12 +71,16 @@ class AddressScreen extends StatelessWidget {
           Expanded(
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
-                value: "Mumbai",
+                value: _selectedCity,
                 items: [
                   DropdownMenuItem(value: "Mumbai", child: Text("Mumbai")),
                   DropdownMenuItem(value: "Delhi", child: Text("Delhi")),
                 ],
-                onChanged: (value) {},
+                onChanged: (value) {
+                  setState(() {
+                    _selectedCity = value!;
+                  });
+                },
               ),
             ),
           ),
@@ -106,19 +114,39 @@ class AddressScreen extends StatelessWidget {
         Row(
           children: [
             Text("Home Care, On Demand", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-
           ],
-
         ),
+        SizedBox(height: 16),
 
-        _buildInfoRow(Icons.check_circle, Colors.green, "100+ Care Buddies to take \n care  of your loved one"),
-        _buildInfoRow(Icons.verified, Colors.blue, "Verified and Experienced \n Professionals"),
-        _buildInfoRow(Icons.people, Colors.orange, "Trusted by 1Mn+ People  \n Across World"),
+        Row(
+          children: [
 
-
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInfoRow(Icons.check_circle, Colors.green, "100+ Care Buddies to take \n care  of your loved one"),
+                  _buildInfoRow(Icons.verified, Colors.blue, "Verified and Experienced \n Professionals"),
+                  _buildInfoRow(Icons.people, Colors.orange, "Trusted by 1Mn+ People  \n Across World"),
+                ],
+              ),
+            ),
+            SizedBox(width: 16),
+            // Right Half: Image
+            Container(
+              width: 100,
+              height: 120,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("asset/faq.png"),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ],
+        ),
       ],
-
-
     );
   }
 
@@ -164,7 +192,6 @@ class AddressScreen extends StatelessWidget {
     );
   }
 
-
   InputDecoration _textFieldDecoration(String hintText) {
     return InputDecoration(
       hintText: hintText,
@@ -174,4 +201,3 @@ class AddressScreen extends StatelessWidget {
     );
   }
 }
-

@@ -3,10 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:healthcare/view/feedback.dart';
 import 'package:healthcare/view/healthplan.dart';
+import 'package:healthcare/view/plandetail.dart';
+import 'package:healthcare/view/plandetail1.dart';
+import 'package:healthcare/view/plandetail2.dart';
 import 'package:healthcare/view/support.dart';
 import 'care_plan.dart';
 import 'login.dart';
 import 'notification.dart';
+
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -69,6 +73,7 @@ class _HomeState extends State<Home> {
                 MaterialPageRoute(builder: (context) => Notification_screen()),
               );
             },
+
           ),
           IconButton(
             icon: const Icon(Icons.menu),
@@ -80,14 +85,13 @@ class _HomeState extends State<Home> {
       ),
       body: Column(
         children: [
-          /// --- Image Slider ---
           Container(
             margin: const EdgeInsets.all(15),
             child: CarouselSlider.builder(
               itemCount: imageList.length,
               options: CarouselOptions(
                 enlargeCenterPage: true,
-                height: 100,
+                height: 95,
                 autoPlay: false,
                 reverse: false,
                 aspectRatio: 5.0,
@@ -116,28 +120,25 @@ class _HomeState extends State<Home> {
               },
             ),
           ),
-
-
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(25),
               child: GridView.count(
+
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                mainAxisSpacing:10,
                 children: [
-                  _buildCard("Health Plan", 'asset/plan_a.png'),
-                  _buildCard("Appointments", 'asset/plan_a.png'),
-                  _buildCard("Medicine", 'asset/plan_a.png'),
-                  _buildCard("Reports", 'asset/plan_a.png'),
+                  _buildCard("Intensive Care", 'asset/plan_a.png', PlanDetail()),
+                  _buildCard("Appointments", 'asset/plan_a.png', plandetail1()),
+                  _buildCard("Basic Medication", 'asset/plan_a.png', PlanDetail2()),
+                  _buildCard("Reports", 'asset/plan_a.png', PlanDetail()),
                 ],
               ),
             ),
           ),
         ],
       ),
-
-
       endDrawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -210,14 +211,12 @@ class _HomeState extends State<Home> {
                     () => Navigator.pop(context)),
             _drawerItem(Icons.exit_to_app, "Logout", () {
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => login()),
+                MaterialPageRoute(builder: (context) => Login()),
               );
             }),
           ],
         ),
       ),
-
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -241,7 +240,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  /// --- Drawer Items ---
   Widget _drawerItem(IconData icon, String title, VoidCallback onTap) {
     return ListTile(
       leading: Icon(icon),
@@ -250,25 +248,37 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget _buildCard(String title, String image, Widget destinationPage) {
+    return GestureDetector(
 
-  Widget _buildCard(String title, String imagePath) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircleAvatar(
-            radius: 35,
-            backgroundImage: AssetImage(imagePath),
-            backgroundColor: Colors.white,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => destinationPage,
           ),
-          const SizedBox(height: 10),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ],
+        );
+      },
+
+      child: Card(
+        color: Colors.blue[50],
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              radius: 35,
+              backgroundImage: AssetImage(image),
+              backgroundColor: Colors.white,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 16, color: Colors.green),
+            ),
+          ],
+        ),
       ),
     );
   }

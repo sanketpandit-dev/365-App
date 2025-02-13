@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-
+import 'package:intl_phone_field/phone_number.dart';
 import 'otpscreen.dart';
 
-class login extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
 
-class _LoginState extends State<login> {
+class _LoginState extends State<Login> {
+  TextEditingController phoneController = TextEditingController();
   bool isPhoneNumberValid = false;
+  String phoneNumber = '';
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class _LoginState extends State<login> {
         centerTitle: true,
         title: Text(
           "Login",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontSize: 18),
         ),
       ),
       body: Padding(
@@ -55,7 +57,10 @@ class _LoginState extends State<login> {
             ),
             SizedBox(height: 15),
             IntlPhoneField(
+
+              controller: phoneController,
               decoration: InputDecoration(
+
                 labelText: 'Mobile Number',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -63,9 +68,11 @@ class _LoginState extends State<login> {
                 ),
               ),
               initialCountryCode: 'IN',
-              onChanged: (phone) {
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              onChanged: (PhoneNumber phone) {
                 setState(() {
-                  isPhoneNumberValid = phone.number.length == 10;
+                  phoneNumber = phone.completeNumber;
+                  isPhoneNumberValid = phone.isValidNumber();
                 });
               },
             ),
@@ -75,7 +82,9 @@ class _LoginState extends State<login> {
                   ? () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => OtpScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => OtpScreen(phoneNumber: phoneNumber),
+                  ),
                 );
               }
                   : null,
@@ -103,5 +112,3 @@ class _LoginState extends State<login> {
     );
   }
 }
-
-

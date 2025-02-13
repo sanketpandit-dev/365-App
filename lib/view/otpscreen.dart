@@ -1,10 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:flutter/services.dart'; // Import for TextInputFormatter
 
 import 'homescreen.dart';
 
 class OtpScreen extends StatefulWidget {
+  final String phoneNumber;
+
+  OtpScreen({required this.phoneNumber});
+
   @override
   _OtpScreenState createState() => _OtpScreenState();
 }
@@ -53,7 +58,18 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String maskedNumber = "XXXXXXX" + widget.phoneNumber.substring(widget.phoneNumber.length - 2);
+
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Padding(
+          padding: const EdgeInsets.all(60.0),
+          child: Text('OTP Verification',style: TextStyle(
+            fontSize: 13,
+          ),),
+        ),
+      ),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -75,13 +91,12 @@ class _OtpScreenState extends State<OtpScreen> {
               style: TextStyle(color: Colors.black54),
             ),
             Text(
-              "+91 XXXXXXXX93",
+              maskedNumber,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
             PinCodeTextField(
-
-
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               appContext: context,
               length: 4,
               controller: otpController,
@@ -94,8 +109,7 @@ class _OtpScreenState extends State<OtpScreen> {
               textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               pinTheme: PinTheme(
                 shape: PinCodeFieldShape.box,
-
-               borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(5),
                 fieldHeight: 50,
                 fieldWidth: 50,
                 activeFillColor: Colors.white,
@@ -105,6 +119,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 inactiveColor: Colors.black26,
                 selectedColor: Colors.orangeAccent,
               ),
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly], // Add this line to restrict input to digits only
             ),
             SizedBox(height: 10),
             Text(

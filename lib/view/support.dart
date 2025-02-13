@@ -78,8 +78,8 @@ class _SupportScreenState extends State<SupportScreen> {
             Container(
 
               decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(2),
+                //color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(1),
               ),
               child: Container(
 

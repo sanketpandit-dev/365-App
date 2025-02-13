@@ -30,103 +30,116 @@ class plandetail1 extends StatelessWidget {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              height: 300,
-              decoration: BoxDecoration(
-                color: Colors.green[100],
-              ),
-              child: Stack(
-                children: [
-                  Opacity(
-                    opacity: 0.5,
-                    child: Image.asset(
-                      'asset/nurse.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const Positioned(
-                    bottom: 20,
-                    left: 0,
-                    right: 0,
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Text(
-                            'Level 2',
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.lightGreenAccent,
-                            ),
-                          ),
-                          Text(
-                            '₹60000 / per month',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            '₹3000 / Daily',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-
-                        ],
-
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              color: Colors.green[50],
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Container(
+        decoration: const BoxDecoration(
+        gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.center,
+        colors: [
+        Color(0xFFA9F2A8),
+        Colors.white,
+        ],
+        ),
+        ),
               child: Column(
                 children: [
-                  const SizedBox(height: 10),
-                  Text(
-                    'Our 365 Care support services include',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey[700],
+                  Container(
+                    width: double.infinity,
+                    height: 300,
+                    decoration: BoxDecoration(
+                   //   color: Colors.green[100],
+                    ),
+                    child: Stack(
+                      children: [
+                        Opacity(
+                          opacity: 0.5,
+                          child: Image.asset(
+                            'asset/nurse.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        const Positioned(
+                          bottom: 20,
+                          left: 0,
+                          right: 0,
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Level 2',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.lightGreenAccent,
+                                  ),
+                                ),
+                                Text(
+                                  '₹60000 / per month',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  '₹3000 / Daily',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+
+                              ],
+
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: mylist.length,
-                    itemBuilder: (context, index) {
-                      return _buildServiceTile(mylist[index]);
-                    },
+                  Container(
+                   // color: Colors.green[50],
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        Text(
+                          'Our 365 Care support services include',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: mylist.length,
+                          itemBuilder: (context, index) {
+                            return _buildServiceTile(mylist[index]);
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          'Through 365 Care Buddies home support services,\n'
+                              'senior citizens or vulnerable adults are provided\n'
+                              'with personal care and companionship that allows\n'
+                              'them to live a good quality of life in the comfort and\n'
+                              'privacy of their own homes. In-home carry buddy is\n'
+                              'a combination of hands-on personal care and non-\n'
+                              'medical companion care.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 12, color: Colors.black),
+                        )
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                  Text(
-                    'Through 365 Care Buddies home support services,\n'
-                        'senior citizens or vulnerable adults are provided\n'
-                        'with personal care and companionship that allows\n'
-                        'them to live a good quality of life in the comfort and\n'
-                        'privacy of their own homes. In-home carry buddy is\n'
-                        'a combination of hands-on personal care and non-\n'
-                        'medical companion care.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 12, color: Colors.black),
-                  )
                 ],
               ),
             ),
-          ],
-        ),
       ),
       bottomNavigationBar: _buildFixedButton(context),
+
     );
   }
 
