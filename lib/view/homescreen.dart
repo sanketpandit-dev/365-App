@@ -9,6 +9,7 @@ import 'package:healthcare/view/plandetail2.dart';
 import 'package:healthcare/view/support.dart';
 import 'care_plan.dart';
 import 'login.dart';
+import 'message.dart';
 import 'notification.dart';
 
 
@@ -222,17 +223,28 @@ class _HomeState extends State<Home> {
         onTap: _onItemTapped,
         selectedItemColor: Colors.orangeAccent,
         unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
+        items: [
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
+            icon: TextButton(onPressed: () {
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => message()),
+            );
+              },
+            child: const Icon(Icons.message)),
             label: 'Message',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.headset_mic),
+            icon: TextButton(onPressed: () {
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SupportScreen()),
+            );  },
+            child: const Icon(Icons.headset_mic)),
             label: 'Support',
           ),
         ],
@@ -242,7 +254,11 @@ class _HomeState extends State<Home> {
 
   Widget _drawerItem(IconData icon, String title, VoidCallback onTap) {
     return ListTile(
-      leading: Icon(icon),
+      
+      leading: CircleAvatar(
+          backgroundColor: Colors.orange[100],
+          child: Icon(icon,color: Colors.black54,)
+      ),
       title: Text(title),
       onTap: onTap,
     );

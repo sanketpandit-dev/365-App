@@ -1,36 +1,10 @@
 import 'package:flutter/material.dart';
 
-class care_taker_list extends StatelessWidget {
-  final List<Map<String, dynamic>> caretakers = [
-    {
-      "name": "Ajay Kumar",
-      "image": "asset/doctor1.jpg",
-      "rating": 4.5,
-      "experience": "3 Years of Experience",
-      "ratingColor": Colors.green
-    },
-    {
-      "name": "Jane Doe",
-      "image": "asset/doctor2.jpg",
-      "rating": 2.0,
-      "experience": "2 Years of Experience",
-      "ratingColor": Colors.red
-    },
-    {
-      "name": "Ajay Kumar",
-      "image": "asset/doctor3.jpg",
-      "rating": 3.1,
-      "experience": "5 Years of Experience",
-      "ratingColor": Colors.orange
-    },
-    {
-      "name": "Ajay Kumar",
-      "image": "asset/doctor4.png",
-      "rating": 4.5,
-      "experience": "1 Year of Experience",
-      "ratingColor": Colors.green
-    },
-  ];
+import '../controller/caretaker_controller.dart';
+import '../model/caretaker_model.dart';
+
+class CaretakerList extends StatelessWidget {
+  final CaretakerController _controller = CaretakerController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,19 +14,33 @@ class care_taker_list extends StatelessWidget {
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text("Choose care taker", style: TextStyle(color: Colors.black)),
+        title: Text("Choose Caretaker", style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
-        elevation: 0,
+        elevation: 1,
       ),
       body: Column(
         children: [
           _buildSearchBar(),
           SizedBox(height: 10),
           Expanded(
-            child: ListView.builder(
-              itemCount: caretakers.length,
-              itemBuilder: (context, index) {
-                return _buildCaretakerCard(caretakers[index]);
+            child: FutureBuilder<List<Caretaker>>(
+              future: _controller.fetchCaretakers(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (snapshot.hasData) {
+                  List<Caretaker> caretakers = snapshot.data!;
+                  return ListView.builder(
+                    itemCount: caretakers.length,
+                    itemBuilder: (context, index) {
+                      return _buildCaretakerCard(caretakers[index]);
+                    },
+                  );
+                } else {
+                  return Center(child: Text('No caretakers found.'));
+                }
               },
             ),
           ),
@@ -62,7 +50,6 @@ class care_taker_list extends StatelessWidget {
     );
   }
 
-  // Search Bar
   Widget _buildSearchBar() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -82,12 +69,11 @@ class care_taker_list extends StatelessWidget {
     );
   }
 
-
-  Widget _buildCaretakerCard(Map<String, dynamic> caretaker) {
+  Widget _buildCaretakerCard(Caretaker caretaker) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Container(
-        padding: EdgeInsets.all(12),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -96,78 +82,68 @@ class care_taker_list extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.asset(
-                caretaker["image"],
+                caretaker.image,
                 width: 60,
                 height: 60,
                 fit: BoxFit.cover,
               ),
             ),
             SizedBox(width: 12),
-
-            // Caretaker Details
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    children: [
-                      Text(
-                        caretaker["name"],
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                    ],
+                  Text(
+                    caretaker.name,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 4),
                   Row(
                     children: [
+                      SizedBox(height: 40),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: caretaker["ratingColor"],
+                          color: caretaker.ratingColor,
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
-                          caretaker["rating"].toString(),
+                          caretaker.rating.toString(),
                           style: TextStyle(color: Colors.white, fontSize: 12),
                         ),
                       ),
                       SizedBox(width: 6),
                       Expanded(
                         child: Text(
-                          caretaker["experience"],
+                          caretaker.experience,
                           style: TextStyle(color: Colors.black54, fontSize: 12),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
                   ),
+                  SizedBox(width: 6),
                   Row(
                     children: [
-                      _buildButton("View Details", Colors.blue.shade100, Colors.black54),
+                      _buildButton(
+                          "View Details", Colors.blue.shade100, Colors.black54),
                       SizedBox(height: 6, width: 10),
-                      _buildButton("Book now", Colors.amber.shade100, Colors.black),
+                      _buildButton(
+                          "Book now", Colors.amber.shade100, Colors.black),
                     ],
                   ),
-
-
                 ],
-
               ),
             ),
-
-            // Buttons Section
-
           ],
         ),
       ),
     );
   }
 
-  // Reusable Button
   Widget _buildButton(String text, Color backgroundColor, Color textColor) {
     return SizedBox(
       width: 90,
@@ -185,5 +161,4 @@ class care_taker_list extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -8,7 +8,7 @@ class FeedbackScreen extends StatelessWidget {
       name: "John Doe",
       memberSince: "Oct 2022",
       review:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing.",
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing.",
       imageUrl: "https://randomuser.me/api/portraits/men/1.jpg",
       rating: 5,
     ),
@@ -16,7 +16,7 @@ class FeedbackScreen extends StatelessWidget {
       name: "John Doe",
       memberSince: "Oct 2022",
       review:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing.",
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing.",
       imageUrl: "https://randomuser.me/api/portraits/men/5.jpg",
       rating: 5,
     ),
@@ -24,7 +24,7 @@ class FeedbackScreen extends StatelessWidget {
       name: "John Doe",
       memberSince: "Oct 2022",
       review:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing.",
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing.",
       imageUrl: "https://randomuser.me/api/portraits/men/9.jpg",
       rating: 5,
     ),
@@ -52,25 +52,18 @@ class FeedbackScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Text(
               'Where are you from ?',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
             ),
             SizedBox(height: 12),
-
-
             _buildSearchBar(),
-
             SizedBox(height: 16),
-
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildCityCard(
                   imagePath: 'asset/gate-of-india.png',
-
                   cityName: "Mumbai",
                 ),
                 _buildCityCard(
@@ -79,23 +72,14 @@ class FeedbackScreen extends StatelessWidget {
                 ),
               ],
             ),
-
             SizedBox(height: 12),
-
-
             _buildComingSoonBanner(),
-
             SizedBox(height: 20),
-
-
             Text(
               "Hear from our happy members",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-
             SizedBox(height: 12),
-
-
             Column(
               children: testimonials
                   .map((testimonial) => _buildTestimonialCard(testimonial))
@@ -141,7 +125,10 @@ class FeedbackScreen extends StatelessWidget {
       child: Row(
         children: [
           Image.asset(imagePath, height: 40),
-          SizedBox(height: 8,width: 5,),
+          SizedBox(
+            height: 8,
+            width: 5,
+          ),
           Text(
             cityName,
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -190,7 +177,6 @@ class FeedbackScreen extends StatelessWidget {
         ],
       ),
       child: Column(
-
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -231,7 +217,7 @@ class FeedbackScreen extends StatelessWidget {
     return Row(
       children: List.generate(
         rating,
-            (index) => Icon(Icons.star, color: Colors.amber, size: 18),
+        (index) => Icon(Icons.star, color: Colors.amber, size: 18),
       ),
     );
   }
